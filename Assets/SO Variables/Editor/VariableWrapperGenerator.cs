@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using System.IO;
 using UnityEngine;
 
@@ -7,6 +7,7 @@ public class VariableWrapperGenerator : EditorWindow
     private string className = "MyTypeVariable";
     private string typeName = "float";
     private string menuPath = "Variables/";
+    private string folderPath = "Assets/SO Variables/Variables/Scripting/";
 
     private Vector2 _scrollPos;
     private const string HelpText =
@@ -22,10 +23,11 @@ public class VariableWrapperGenerator : EditorWindow
         className = EditorGUILayout.TextField("Class Name", className);
         typeName = EditorGUILayout.TextField("Type Name", typeName);
         menuPath = EditorGUILayout.TextField("Menu Path", menuPath);
+        folderPath = EditorGUILayout.TextField("Folder Path", folderPath);
 
         if (GUILayout.Button("Generate Wrapper"))
         {
-            var folder = "Assets/Scriptable Objects/Variables/Scripting";
+            var folder = folderPath;
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
             var filePath = $"{folder}/{className}Variable.cs";
@@ -57,7 +59,7 @@ public class {className}Variable : Variable<{typeName}> {{ }}
             normal = { textColor = Color.white }
         };
 
-        // Draw the text area (read‐only)
+        // Draw the text area (read?only)
         EditorGUILayout.TextArea(
             HelpText,
             whiteStyle,
@@ -69,3 +71,4 @@ public class {className}Variable : Variable<{typeName}> {{ }}
         
     }
 }
+
